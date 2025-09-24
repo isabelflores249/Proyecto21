@@ -1,1 +1,1 @@
-cartas=[]
+cartas=[{}]
