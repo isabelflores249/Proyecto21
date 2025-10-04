@@ -182,7 +182,7 @@ def jugar():
     
     while True:
         puntos = jugador.calcular_puntos()
-        print("Tu mano: {jugador.mostrar_mano()}  (Puntos: {puntos})")
+        print(f"Tu mano: {jugador.mostrar_mano()}  (Puntos: {puntos})")
         if puntos > 21:
             print("Te pasaste de 21. Fin del juego.")
             break
