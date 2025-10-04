@@ -59,7 +59,7 @@ cartas = [
 ]
 
 # Diccionario 
-# Queremos ver como corre el programa, por ende debemos incluir una simulacion de ejemplo dentro del main que debemos hacer
+# Queremos ver como corre el programa, por ende debemos incluir una simulación de ejemplo dentro del main que debemos hacer
 
 valores_por_nombre = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
@@ -239,7 +239,7 @@ if __name__ == "__main__":
 
 #Como se juega:
 
-#se reparten 2 casrtas a cada jugador usando la funcion "repartir_inicial"
+#se reparten 2 cartas a cada jugador usando la funcion "repartir_inicial"
 #mientras el jugador no se pase de 21 puntos, se repite
 #el jugador decide si quiere otra carta o no
 #si el jugador supera 21, pierde el turno automaticamente
