@@ -180,7 +180,7 @@ def jugar():
             print("Te pasaste de 21. Fin del juego.")
             break
         opcion = input("¿Quieres otra carta? (si/no): ").strip().lower()
-        if opcion == "s":
+        if opcion == "si":
             carta = baraja.repartir()
             if carta:
                 jugador.recibir_carta(carta)
