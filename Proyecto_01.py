@@ -58,18 +58,11 @@ cartas = [
     {'palo': 'picas', 'nombre': 'As', 'valor': 11}
 ]
 
-# Diccionario 
-# Queremos ver como corre el programa, por ende debemos incluir una simulación de ejemplo dentro del main que debemos hacer
-
-valores_por_nombre = {
-    '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
-    '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10, 'As': 11
-}
 
 # Clase de cartas, baraja y jugador
 
 class Carta:
-    def __init__(self, palo: str, nombre: str, valor: int): # trabajamos con los atributos de la clase carta ("palo", "nombre", "valor"). Se nombran igual que las llaves de los diccionarios de la base de datos.
+    def __init__(self, palo, nombre, valor): # trabajamos con los atributos de la clase carta ("palo", "nombre", "valor"). Se nombran igual que las llaves de los diccionarios de la base de datos.
         self.palo = palo
         self.nombre = nombre
         self.valor = valor
