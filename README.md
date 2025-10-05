@@ -1,4 +1,4 @@
-# ProyectoPoker
+# Proyecto21
 
 Intrucciones del trabajo:
 
