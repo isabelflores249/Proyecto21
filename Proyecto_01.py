@@ -119,7 +119,7 @@ def repartir_inicial(baraja, jugadores, n_cartas=2): # Reparte n_cartas a cada j
         for jugador in jugadores:
             carta = baraja.repartir()
             jugador.recibir_carta(carta)
-            print("{jugador.nombre} recibe {carta}")
+            print(f"{jugador.nombre} recibe {carta}")
 
 def verificar_sin_duplicados(jugadores): # Verifica que entre todas las manos no se repita una misma carta.
     conjunto = set()
@@ -153,81 +153,51 @@ def decidir_ganador(jugador, compu):
     # 4. Si tienen lo mismo, empate.
     return "empate", f"{jugador} vs {compu}"
 
-# Main()
+# MAIN DEL JUEGO
 
-def jugar():
-    print("Simulador Blackjack (Jugador vs Computadora)") # Creamos la baraja usando exactamente la base "Cartas" que diste.
-    baraja = Baraja(cartas)                         # Llamamos directamente la base de datos
-    baraja.barajar()                                # Mezclamos
+def main():
+    print("Simulador de BlackJack (21)")
+    nombre = input("Ingrese su nombre: ")
 
-    jugador = Jugador("Tú")
-    computadora = Jugador("Computadora")
+    # Crear baraja y jugadores
+    baraja = Baraja(cartas)
+    baraja.barajar()
+    jugador = Jugador(nombre)
+    compu = Jugador("Computadora")
 
-    # Reparto inicial (2 cartas cada uno, computadora y jugador).
-    repartir_inicial(baraja, [jugador, computadora], n_cartas=2)
+    # Repartir cartas iniciales
+    repartir_inicial(baraja, [jugador, compu], n_cartas=2)
 
-    # Verificación con conjuntos: aseguramos que no haya duplicados.
-    ok, clave = verificar_sin_duplicados([jugador, computadora])
-    if not ok:
-        print("ERROR: Se encontró una carta duplicada:", clave)
-        return
+    # Mostrar manos
+    print(f"\n{jugador.nombre}: {jugador.mostrar_mano()} (Total: {jugador.calcular_puntos()})")
+    print(f"{compu.nombre}: {compu.mostrar_mano()} (Total: {compu.calcular_puntos()})")
 
     # Turno del jugador
-    
-    while True:
-        puntos = jugador.calcular_puntos()
-        print(f"Tu mano: {jugador.mostrar_mano()}  (Puntos: {puntos})")
-        if puntos > 21:
-            print("Te pasaste de 21. Fin del juego.")
-            break
-        opcion = input("¿Quieres otra carta? (si/no): ").strip().lower()
-        if opcion == "si":
+    while jugador.calcular_puntos() < 21:
+        accion = input("¿Desea otra carta? (si/no): ").lower()
+        if accion == 's':
             carta = baraja.repartir()
-            if carta:
-                jugador.recibir_carta(carta)
-                print("Recibiste:", carta)
-            else:
-                print("No quedan cartas en la baraja.")
-                break
+            jugador.recibir_carta(carta)
+            print(f"Recibes {carta}")
+            print(f"Tu mano: {jugador.mostrar_mano()} (Total: {jugador.calcular_puntos()})")
         else:
             break
 
     # Turno de la computadora
-    
-    print("Turno de la computadora...")
-    print("Computadora muestra:", computadora.mostrar_mano(ocultar_primera=True))
-    while computadora.calcular_puntos() < 17:
+    while compu.calcular_puntos() < 17:
         carta = baraja.repartir()
-        if carta:
-            computadora.recibir_carta(carta)
-            # no hay que mostrar las cartas de la computadora, como es siempre el rival no tendria sentido que nos la muestre.
-        else:
-            break
+        compu.recibir_carta(carta)
 
-    # Resultados 
-    
-    print("Resultados finales")
-    print("Tu mano final: ", jugador.mostrar_mano(), "(Puntos:", jugador.calcular_puntos(), ")")
-    print("Mano de computadora:", computadora.mostrar_mano(), "(Puntos:", computadora.calcular_puntos(), ")")
+    # Mostrar resultados finales
+    print("Resultado")
+    print(f"{jugador.nombre}: {jugador.mostrar_mano()} (Total: {jugador.calcular_puntos()})")
+    print(f"{compu.nombre}: {compu.mostrar_mano()} (Total: {compu.calcular_puntos()})")
 
-    ganador, motivo = decidir_ganador(jugador, computadora)
-    if ganador == "jugador":
-        print("Ganaste (", motivo, ")")
-    elif ganador == "computadora":
-        print("Ganó la computadora. (", motivo, ")")
-    else:
-        print("Empate. (", motivo, ")")
+    # Decidir ganador
+    ganador, detalle = decidir_ganador(jugador, compu)
+    print(f"\nGanador: {ganador.upper()} ({detalle})")
 
-    # Comprobación final de duplicados en todas las cartas repartidas.
-    ok2, clave2 = verificar_sin_duplicados([jugador, computadora])
-    if not ok2:
-        print("ADVERTENCIA: carta duplicada:", clave2)
-
-
-def main():
-    jugar()
-
-
+# Ejecutar el juego
 if __name__ == "__main__":
     main()
 
