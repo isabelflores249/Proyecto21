@@ -115,7 +115,7 @@ class Jugador:
 
 def repartir_inicial(baraja, jugadores, n_cartas=2): # Reparte n_cartas a cada jugador (mostrando la ronda)
     for ronda in range(n_cartas):
-        print("Ronda {ronda + 1}")
+        print(f"Ronda {ronda + 1}")
         for jugador in jugadores:
             carta = baraja.repartir()
             jugador.recibir_carta(carta)
