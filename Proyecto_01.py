@@ -175,7 +175,7 @@ def main():
     # Turno del jugador
     while jugador.calcular_puntos() < 21:
         accion = input("¿Desea otra carta? (si/no): ").lower()
-        if accion == 's':
+        if accion == 'si':
             carta = baraja.repartir()
             jugador.recibir_carta(carta)
             print(f"Recibes {carta}")
