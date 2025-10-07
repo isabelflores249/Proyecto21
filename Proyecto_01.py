@@ -83,7 +83,7 @@ class Baraja:
     def repartir(self):
         if not self.cartas:
             return None
-        return self.cartas.pop()  # pop() lo estamos usando para que reparta las cartas del mazo al jugador.
+        return self.cartas.pop()  # pop() lo estamos usando para que reparta las cartas del mazo al jugador, ya que saca la última carta del mazo y la devuelve, para que el jugador la reciba y esta carta ya no queda en el mazo(evitando duplicados).
 
     def tamaño(self):
         return len(self.cartas)
@@ -98,9 +98,9 @@ class Jugador:
             self.mano.append(carta)
 
     def mostrar_mano(self): # Muestra la mano de cartas.
-        return ", ".join(str(c) for c in self.mano)
+        return ", ".join(str(c) for c in self.mano) # ", " es como va a separar los elementos de la cadena, str para devolverlo tipo string.
 
-    def calcular_puntos(self): # Suma los valores, ajusta los As, si se pasa de 21.
+    def calcular_puntos(self): # Suma los valores, ajusta los As, si se pasa de 21, a conveniencia del jugador o computaodra 
         total = sum(carta.valor for carta in self.mano)
         ases = sum(1 for carta in self.mano if carta.nombre == "As")
         while total > 21 and ases > 0:
@@ -109,7 +109,7 @@ class Jugador:
         return total
 
     def tiene_duplicados(self): # Comprueba si hay cartas duplicadas en la mano.
-        tuplas = [c.as_tuple() for c in self.mano]
+        tuplas = [c.as_tuple() for c in self.mano]  # la c antes de as_tuple es de carta 
         return len(set(tuplas)) != len(tuplas) # diferente de
 
 
@@ -129,7 +129,7 @@ def verificar_sin_duplicados(jugadores): # Verifica que entre todas las manos no
             if key in conjunto:
                 return False, key   # hubo duplicado
             conjunto.add(key)
-    return True, None
+    return True, None # ya no hay cartas repetidas
 
 
 def decidir_ganador(jugador, compu):
