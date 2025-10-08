@@ -1,4 +1,4 @@
-# Simulador simple de Blackjack, los participantes serian el/la jugador(a).
+# Simulador de Blackjack(21), los participantes serian el/la jugador(a).
 
 import random
 
@@ -113,7 +113,7 @@ class Jugador:
         return len(set(tuplas)) != len(tuplas) # diferente de
 
 
-def repartir_inicial(baraja, jugadores, n_cartas=2): # Reparte n_cartas a cada jugador (mostrando la ronda)
+def repartir(baraja, jugadores, n_cartas=2): # Reparte n_cartas a cada jugador (mostrando la ronda)
     for ronda in range(n_cartas):
         print(f"Ronda {ronda + 1}")
         for jugador in jugadores:
@@ -166,7 +166,7 @@ def main():
     compu = Jugador("Computadora")
 
     # Repartir cartas iniciales
-    repartir_inicial(baraja, [jugador, compu], n_cartas=2)
+    repartir(baraja, [jugador, compu], n_cartas=2)
 
     # Mostrar manos
     print(f"\n{jugador.nombre}: {jugador.mostrar_mano()} (Total: {jugador.calcular_puntos()})")
