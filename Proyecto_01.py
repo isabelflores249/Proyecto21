@@ -137,20 +137,20 @@ def decidir_ganador(jugador, compu):
     jugador = jugador.calcular_puntos()
     compu = compu.calcular_puntos()
 
-    # 1. Si ambos se pasan (>21), empate.
+    # Si ambos se pasan, empate.
     if jugador > 21 and compu > 21:
         return "empate", "ambos se pasaron"
-    # 2. Si uno se pasa, el otro gana.
+    # Si uno se pasa, el otro gana.
     if jugador > 21:
         return "computadora", "te pasaste"
     if compu > 21:
         return "jugador", "computadora se pasó"
-    # 3. Si ninguno se pasa, gana el de más puntos.
+    # Si ninguno se pasa, gana el de más puntos.
     if jugador > compu:
         return "jugador", f"{jugador} vs {compu}"
     if compu > jugador:
         return "computadora", f"{jugador} vs {compu}"
-    # 4. Si tienen lo mismo, empate.
+    # Si tienen lo mismo, empate.
     return "empate", f"{jugador} vs {compu}"
 
 # MAIN DEL JUEGO
@@ -184,7 +184,7 @@ def main():
             break
 
     # Turno de la computadora
-    while compu.calcular_puntos() < 17:
+    while compu.calcular_puntos() < 21:
         carta = baraja.repartir()
         compu.recibir_carta(carta)
 
@@ -201,14 +201,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-#Como se juega:
-
-#se reparten 2 cartas a cada jugador usando la funcion "repartir_inicial"
-#mientras el jugador no se pase de 21 puntos, se repite
-#el jugador decide si quiere otra carta o no
-#si el jugador supera 21, pierde el turno automaticamente
-#la compu muestra su mano parcialmente, es decir, su primera carta se mantiene oculta
-#la computadora sigue sacando cartas mientras su total sea menor que 17
-#para determinar el jugador, se calculan los puntos finales de ambos jugadores
-#se decide segun, si alguien supera 21 pierde, si nadie se pasa, gana quien se acerca mas a 21, si ambos tienen el mismo puntaje es empate 
-#Inicio, Crear baraja, Barajar, Repartir, Turno jugador, Turno computadora, Calcular puntos, Mostrar ganador.
