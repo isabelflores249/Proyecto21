@@ -1,4 +1,5 @@
 # Simulador de Blackjack(21), los participantes serian el/la jugador(a).
+# https://github.com/isabelflores249/Proyecto21
 
 import random
 
