@@ -86,7 +86,7 @@ class Baraja:
         return self.cartas.pop()  # pop() lo estamos usando para que reparta las cartas del mazo al jugador, ya que saca la última carta del mazo y la devuelve, para que el jugador la reciba y esta carta ya no queda en el mazo(evitando duplicados).
 
     def tamaño(self):
-        return len(self.cartas)
+        return len(self.cartas) 
         
 class Jugador:
     def __init__(self, nombre):
@@ -105,20 +105,21 @@ class Jugador:
         ases = sum(1 for carta in self.mano if carta.nombre == "As")
         while total > 21 and ases > 0:
             total -= 10  # convierte un As de 11 a 1
-            ases -= 1 #  (-= resta el valor de la derecha a la variable de la izquierda)
+            ases -= 1 #  (-= resta el valor de la derecha a la variable de la izquierda), el As ya fue ajustado a 1
         return total
 
     def tiene_duplicados(self): # Comprueba si hay cartas duplicadas en la mano.
         tuplas = [c.as_tuple() for c in self.mano]  # la c antes de as_tuple es de carta 
-        return len(set(tuplas)) != len(tuplas) # diferente de
+        return len(set(tuplas)) != len(tuplas) # diferente de, set crea un conjunto que no permite elementos duplicados, 
+        #len(set(tuplas)) es el numero de la tupla sin duplicados y len(tuplas) es el tamaño de la tupla original, si el tamaño es distinto es porque habian duplicados
 
 
 def repartir(baraja, jugadores, n_cartas=2): # Reparte n_cartas a cada jugador (mostrando la ronda)
-    for ronda in range(n_cartas):
-        print(f"Ronda {ronda + 1}")
-        for jugador in jugadores:
-            carta = baraja.repartir()
-            jugador.recibir_carta(carta)
+    for ronda in range(n_cartas): #itera por cada ronda
+        print(f"Ronda {ronda + 1}") #se suma +1 porque range() empieza desde 0, y las rondas deben verse como 1, 2...
+        for jugador in jugadores: #recorre todos los jugadores
+            carta = baraja.repartir() #saca una carta del mazo
+            jugador.recibir_carta(carta) #se la da al jugador
             print(f"{jugador.nombre} recibe {carta}")
 
 def verificar_sin_duplicados(jugadores): # Verifica que entre todas las manos no se repita una misma carta.
@@ -153,7 +154,7 @@ def decidir_ganador(jugador, compu):
     # Si tienen lo mismo, empate.
     return "empate", f"{jugador} vs {compu}"
 
-# MAIN DEL JUEGO
+# main() del juego
 
 def main():
     print("Simulador de BlackJack (21)")
@@ -200,4 +201,3 @@ def main():
 # Ejecutar el juego
 if __name__ == "__main__":
     main()
-
